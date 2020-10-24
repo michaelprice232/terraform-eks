@@ -1,0 +1,14 @@
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: ebs-csi-sc
+provisioner: ebs.csi.aws.com
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+parameters:
+  csi.storage.k8s.io/fstype: ext4
+  type: gp2
+  encrypted: "true"
+  kmsKeyId: "f5a0390f-71da-478c-b87b-5b5e0b126ec3"

@@ -11,6 +11,6 @@ resource "aws_kms_key" "eks" {
 }
 
 resource "aws_kms_alias" "a" {
-  name          = "alias/k8s-envelope-encryption-key-${var.environment_name}"
+  name          = "alias/k8s-envelope-encryption-key-fargate-${var.environment_name}"
   target_key_id = aws_kms_key.eks.key_id
 }

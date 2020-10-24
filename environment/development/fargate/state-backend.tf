@@ -2,7 +2,7 @@
 terraform {
   backend "s3" {
     bucket = "mike-terraform-state-bucket-94823"
-    key    = "development/vpc"
+    key    = "development/fargate"
     region = "eu-west-1"
   }
 }

@@ -34,13 +34,7 @@ variable "map_users" {
     groups   = list(string)
   }))
 
-  default = [
-    {
-      userarn  = "arn:aws:iam::843361875856:user/michaelprice"
-      username = "michaelprice"
-      groups   = ["system:masters"]
-    },
-  ]
+  default = []
 }
 
 variable "k8s_version" {
@@ -56,14 +50,4 @@ variable "endpoint_private_access_enabled" {
 variable "kms_key_deletion_days" {
   description = "How many days after the KMS key is marked for deletion it actually deletes"
   default     = 7
-}
-
-variable "mgmt_node_instance_size" {
-  description = "EC2 instance size of the management node"
-  default     = "t3.small"
-}
-
-variable "mgmt_node_ssh_key_name" {
-  description = "EC2 SSH key name to authorise"
-  default     = "mike-price"
 }
