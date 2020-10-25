@@ -26,7 +26,7 @@ terraform init
 terraform apply -auto-approve
 
 # Fargate module
-MODULE="fargate"
+MODULE="eks-fargate"
 echo "Applying ${MODULE} module..."
 cd "${HERE}/environment/${ENVIRONMENT}/${MODULE}/"
 rm -Rf .terraform
@@ -34,7 +34,7 @@ terraform init
 terraform apply -auto-approve
 
 # EKS infra
-MODULE="eks"
+MODULE="eks-managed-nodegroups"
 echo "Applying ${MODULE} module..."
 cd "${HERE}/environment/${ENVIRONMENT}/${MODULE}/"
 rm -Rf .terraform

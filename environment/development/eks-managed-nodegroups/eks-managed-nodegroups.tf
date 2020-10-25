@@ -1,7 +1,7 @@
 # Create EKS cluster + managed node groups
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = var.environment_name
+  cluster_name    = local.cluster_name
   cluster_version = var.k8s_version
 
   # Enable private API endpoint
@@ -9,6 +9,9 @@ module "eks" {
 
   # Don't write a local kubeconfig file as it relies on IAM Authenticator (generate from the AWS CLI instead)
   write_kubeconfig = false
+
+  # Enable EKS service accounts (IRSA)
+  enable_irsa = true
 
   vpc_id  = data.terraform_remote_state.vpc.outputs.vpc_id
   subnets = data.terraform_remote_state.vpc.outputs.private_subnets
@@ -46,9 +49,6 @@ module "eks" {
       additional_tags = {
         Environment      = var.environment_name
         OwnerEmail       = "michael.price@capgemini.com"
-        ProjectOrPurpose = "Training"
-        ServiceHours     = "Sat-Sun_8am-6pm"
-        ExpirationDate   = "14-09-21"
       }
     }
   }

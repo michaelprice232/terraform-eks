@@ -1,7 +1,7 @@
 # Create Fargate only EKS cluster
 module "eks_fargate" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = "${var.environment_name}-fargate-only"
+  cluster_name    = local.cluster_name
   cluster_version = var.k8s_version
 
   # Enable private API endpoint

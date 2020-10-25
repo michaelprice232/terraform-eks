@@ -1,0 +1,25 @@
+---
+# Service account which is mapped to an IAM role
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: s3-access-sa
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::904806826062:role/development-eks-s3-access-sa-role"
+
+
+---
+# Pod which sleeps for 24 hours. Container image has the AWS CLI installed
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sa-app
+spec:
+  containers:
+    - name: sa-app
+      image: 904806826062.dkr.ecr.eu-west-1.amazonaws.com/aws-cli:0.1
+      command: ["/bin/bash"]
+      args: ["-c", "sleep 86400"]
+  serviceAccountName: s3-access-sa    # Allowed to assume IAM role via trust policy
+
+
