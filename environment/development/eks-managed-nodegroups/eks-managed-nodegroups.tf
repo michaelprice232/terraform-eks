@@ -37,10 +37,10 @@ module "eks" {
   }
 
   node_groups = {
-    standard_workers = {
-      desired_capacity = 2
-      max_capacity     = 2
-      min_capacity     = 2
+    workers = {
+      desired_capacity = 3
+      max_capacity     = 3
+      min_capacity     = 3
 
       instance_type = "t3.medium"
       k8s_labels = {

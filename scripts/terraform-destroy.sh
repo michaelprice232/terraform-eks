@@ -14,7 +14,7 @@ HERE=$(pwd)
 
 ## Run terraform destroy ##
 # EKS module
-MODULE="eks"
+MODULE="eks-managed-nodegroups"
 echo "Destroying ${MODULE} module..."
 cd "${HERE}/environment/${ENVIRONMENT}/${MODULE}/"
 rm -Rf .terraform
@@ -22,7 +22,7 @@ terraform init
 terraform destroy -auto-approve
 
 # Fargate module
-MODULE="fargate"
+MODULE="eks-fargate"
 echo "Destroying ${MODULE} module..."
 cd "${HERE}/environment/${ENVIRONMENT}/${MODULE}/"
 rm -Rf .terraform

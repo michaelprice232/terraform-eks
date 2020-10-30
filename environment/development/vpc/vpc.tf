@@ -27,13 +27,15 @@ module "vpc_ireland" {
 
   # Required subnet tags by EKS for auto discovery
   public_subnet_tags = {
-    "kubernetes.io/cluster/${var.environment_name}" = "shared"
-    "kubernetes.io/role/elb"                        = "1"
+    "kubernetes.io/cluster/${var.environment_name}-fargate-only"        = "shared"
+    "kubernetes.io/cluster/${var.environment_name}-managed-nodegroups"  = "shared"
+    "kubernetes.io/role/elb"                                            = "1"
   }
 
   private_subnet_tags = {
-    "kubernetes.io/cluster/${var.environment_name}" = "shared"
-    "kubernetes.io/role/internal-elb"               = "1"
+    "kubernetes.io/cluster/${var.environment_name}-fargate-only"        = "shared"
+    "kubernetes.io/cluster/${var.environment_name}-managed-nodegroups"  = "shared"
+    "kubernetes.io/role/internal-elb"                                   = "1"
   }
 
   tags = {
