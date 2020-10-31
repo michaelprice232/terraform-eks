@@ -12,3 +12,8 @@ variable "tag_owner" {
   description = "The owner of the resource"
   default     = "Mike Price"
 }
+
+variable "az_count" {
+  description = "How many availability zones are we deploying to?"
+  default     = 3
+}

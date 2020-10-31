@@ -11,4 +11,4 @@ parameters:
   csi.storage.k8s.io/fstype: ext4
   type: gp2
   encrypted: "true"
-  kmsKeyId: "f5a0390f-71da-478c-b87b-5b5e0b126ec3"
+  kmsKeyId: "a7db9c5d-a73d-43a1-84d1-fab0eaebf9f7"

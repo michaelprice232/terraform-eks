@@ -39,7 +39,7 @@ variable "map_users" {
 
 variable "k8s_version" {
   description = "What version of K8s EKS control plane to deploy"
-  default     = "1.18"
+  default     = "1.17"        # Allow us to demo the upgrade option
 }
 
 variable "endpoint_private_access_enabled" {

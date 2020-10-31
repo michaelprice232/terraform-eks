@@ -6,18 +6,20 @@ module "vpc_ireland" {
   name = "mike-${var.environment_name}"
   cidr = var.vpc_cidr
 
-  # todo: split these using terraform functions
-  azs = [data.aws_availability_zones.available.names[0],
-    data.aws_availability_zones.available.names[1],
-  data.aws_availability_zones.available.names[2]]
+  azs = [
+    for num in range(var.az_count):
+      data.aws_availability_zones.available.names[num]
+  ]
 
-  private_subnets = [cidrsubnet(var.vpc_cidr, 4, 0),
-    cidrsubnet(var.vpc_cidr, 4, 1),
-  cidrsubnet(var.vpc_cidr, 4, 2)]
+  private_subnets = [
+    for num in range(var.az_count):
+      cidrsubnet(var.vpc_cidr, 4, num)
+  ]
 
-  public_subnets = [cidrsubnet(var.vpc_cidr, 4, 3),
-    cidrsubnet(var.vpc_cidr, 4, 4),
-  cidrsubnet(var.vpc_cidr, 4, 5)]
+  public_subnets = [
+    for num in range(var.az_count, (var.az_count * 2)):
+      cidrsubnet(var.vpc_cidr, 4, num)
+  ]
 
   enable_dns_hostnames = true
   enable_dns_support   = true
