@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Script for destroying terraform
-# Must use the assume-mfa-role-hmrc.sh script as we need MFA enabled temp credentials
 
 set -e
+
+# Which terraform modules to destroy
+MODULES_TO_DESTROY="eks-fargate eks-managed-nodegroups vpc"
 
 ENVIRONMENT=${1:-'development'}
 REGION=${2:-'eu-west-1'}
@@ -12,31 +14,11 @@ export AWS_DEFAULT_REGION="${REGION}"
 
 HERE=$(pwd)
 
-## Run terraform destroy ##
-# EKS module
-MODULE="eks-managed-nodegroups"
-echo "Destroying ${MODULE} module..."
-cd "${HERE}/environment/${ENVIRONMENT}/${MODULE}/"
-rm -Rf .terraform
-terraform init
-terraform destroy -auto-approve
-
-# Fargate module
-MODULE="eks-fargate"
-echo "Destroying ${MODULE} module..."
-cd "${HERE}/environment/${ENVIRONMENT}/${MODULE}/"
-rm -Rf .terraform
-terraform init
-terraform destroy -auto-approve
-
-# VPC infra
-MODULE="vpc"
-echo "Destroying ${MODULE} module..."
-cd "${HERE}/environment/${ENVIRONMENT}/${MODULE}/"
-rm -Rf .terraform
-terraform init
-terraform destroy -auto-approve
-
-
-
-
+# Destroy the terraform modules
+for module in ${MODULES_TO_DESTROY}; do
+  echo "Destroying ${module} module..."
+  cd "${HERE}/environment/${ENVIRONMENT}/${module}/"
+  rm -Rf .terraform
+  terraform init
+  terraform destroy -auto-approve
+done
