@@ -34,13 +34,7 @@ variable "map_users" {
     groups   = list(string)
   }))
 
-  default = [
-    {
-      userarn  = "arn:aws:iam::843361875856:user/michaelprice"
-      username = "michaelprice"
-      groups   = ["system:masters"]
-    },
-  ]
+  default = []
 }
 
 variable "k8s_version" {

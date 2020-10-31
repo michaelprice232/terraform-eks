@@ -13,6 +13,10 @@ resource "aws_eks_fargate_profile" "default_namespace_sample_app" {
       app = "sample-app"
     }
   }
+
+  timeouts {
+    delete = "60m"      # Doesn't delete in time with active nodes
+  }
 }
 
 # kube-system workloads (inc. coredns)
@@ -25,6 +29,10 @@ resource "aws_eks_fargate_profile" "kube_system_namespace" {
   # Only filter on namespace
   selector {
     namespace = "kube-system"
+  }
+
+  timeouts {
+    delete = "60m"    # Doesn't delete in time with active nodes
   }
 
   # There appears to be a scheduling issue when building concurrently, so adding dependency
