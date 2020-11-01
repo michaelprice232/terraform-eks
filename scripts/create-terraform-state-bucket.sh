@@ -11,7 +11,7 @@ export AWS_DEFAULT_REGION="${REGION}"
 
 # Create bucket (if required)
 echo -e "Checking whether bucket (${BUCKET_NAME}) already exists"
-if aws s3 ls | grep -q "${BUCKET_NAME}"; then
+if aws s3 ls | grep -q "${BUCKET_NAME}" >> /dev/null; then
   echo -e "Bucket already exists. Skipping creation..."
 else
   echo -e "Creating bucket ${BUCKET_NAME} in AWS region: ${REGION}"

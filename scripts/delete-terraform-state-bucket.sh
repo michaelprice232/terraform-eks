@@ -12,7 +12,7 @@ export AWS_DEFAULT_REGION="${REGION}"
 
 # Check whether bucket exists
 echo -e "Checking whether bucket (${BUCKET_NAME}) exists"
-if aws s3 ls | grep -q "${BUCKET_NAME}"; then
+if aws s3 ls | grep -q "${BUCKET_NAME}" >> /dev/null; then
   echo -e "Bucket exists..."
 
   # Delete all object versions so we can delete the empty bucket
